@@ -1,0 +1,59 @@
+
+/* App Module */
+
+var mentionsManager = {};
+mentionsManager.cantinaApp = {};
+
+(function () {
+
+    mentionsManager.cantinaApp = angular.module('cantinaApp',
+        ['ngRoute', 'cantinaFilters', 'bootstrap-tagsinput', 'infinite-scroll', 'ngBootstrap', 'ng-bootstrap-multiselect']);
+
+    mentionsManager.cantinaApp.config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'partials/expressionMentions.html',
+                controller: 'MentionsController'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    }]);
+
+}());
+
+/**
+ * Truncate Filter
+ * @Param text
+ * @Param length, default is 10
+ * @Param end, default is "..."
+ * @return string
+ */
+var filters = angular.module('cantinaFilters', []);
+filters.filter('truncate', function () {
+        return function (text, length, end) {
+            if (isNaN(length))
+                length = 10;
+
+            if (end === undefined)
+                end = "...";
+
+            if (text.length <= length || text.length - end.length <= length) {
+                return text;
+            }
+            else {
+                return String(text).substring(0, length-end.length) + end;
+            }
+
+        };
+    });
+
+filters.filter('removeHttps', function () {
+        return function (text) {
+            return String(text).substring(7) ;
+        };
+    });
+
+
+
+

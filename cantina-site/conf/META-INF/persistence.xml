@@ -1,0 +1,45 @@
+    <persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="defaultPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source>DefaultDS</non-jta-data-source>
+        <class>cantina.db.entity.Account</class>
+        <class>cantina.db.entity.Expression</class>
+        <class>cantina.db.entity.facebook.FacebookAccount</class>
+        <class>cantina.db.entity.facebook.FacebookComment</class>
+        <class>cantina.db.entity.facebook.FacebookPage</class>
+        <class>cantina.db.entity.facebook.FacebookPost</class>
+        <class>cantina.db.entity.forum.Forum</class>
+        <class>cantina.db.entity.forum.ForumAccount</class>
+        <class>cantina.db.entity.forum.ForumPost</class>
+        <class>cantina.db.entity.forum.ForumThread</class>
+        <class>cantina.db.entity.site.Site</class>
+        <class>cantina.db.entity.site.SiteFeed</class>
+        <class>cantina.db.entity.site.SiteArticle</class>
+        <class>cantina.db.entity.site.SiteCategory</class>
+        <class>cantina.db.entity.site.SiteCategoryMatch</class>
+        <class>cantina.db.entity.ExpressionMatch</class>
+        <class>cantina.db.entity.ExpressionGroup</class>
+        <class>cantina.db.entity.twitter.TwitterAccount</class>
+        <class>cantina.db.entity.twitter.TwitterTweet</class>
+        <class>cantina.db.entity.twitter.TwitterEvolution</class>
+        <class>cantina.db.entity.twitter.TwitterStream</class>
+        <class>cantina.db.entity.link.Link</class>
+        <class>cantina.db.entity.link.LinkDay</class>
+        <class>cantina.db.entity.User</class>
+        <class>cantina.db.entity.person.Person</class>
+        <class>cantina.db.entity.messenger.MonCred</class>
+        <class>cantina.db.entity.messenger.PrvMsg</class>
+        <class>cantina.db.entity.messenger.PrvMsgAuthor</class>
+        <class>cantina.db.entity.messenger.PrvPost</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+        </properties>
+    </persistence-unit>
+
+
+</persistence>

@@ -1,0 +1,144 @@
+<div class="col-md-9">
+
+        <!--{{tweetsNumber}}-->
+
+    <table class="table table-hover" style="background-color: white">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Last Visit</th>
+                <th>Platform</th>
+                <th>Status</th>
+                <th>Url</th>
+                <th>RSS</th>
+                <th>Category</th>
+                <th>Owner</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="thread in threads|orderBy:'publishing_date':true">
+                <td>{{thread.id}}</td>
+                <td>{{thread.last_visit|date:'dd MMM yyyy - HH:mm'}}</td>
+                <td><span editable-select="thread.platform" e-name="platform" e-form="rowform" e-ng-options="p.value as p.text for p in platforms">
+          {{ showPlatform(thread) }}
+                </span></td>
+                <td>
+
+                    {{thread.status|status}}
+
+                </td>
+
+                <td><a href="http://{{thread.url}}" target="_blank">
+
+                    <span editable-text="thread.url" e-name="url" e-form="rowform" e-required>
+          {{ thread.url || 'empty' }}
+                    </span>
+
+                </a></td>
+                <td>
+                    <ul>
+                        <li ng-repeat="rss in thread.rss" style="list-style-type:none;">
+                            <span editable-text="rss.url" e-name="rss{{rss.id}}" e-form="rowform" e-required>
+                                {{ rss.url || 'empty' }}
+                            </span>
+                        </li>
+                        <li style="list-style-type:none;">
+                            <span editable-text="text" e-name="new_rss" e-form="rowform" e-required>
+
+                            </span>
+                        </li>
+                    </ul>
+                </td>
+                <!-- Select category column -->
+                <td>
+                    <ul>
+                        <li ng-repeat="category in thread.categories" style="list-style-type:none;">
+                            <span editable-select="category.id_category" e-name="category{{category.id_category}}" e-form="rowform"
+                                    e-ng-options="c.id as c.name for c in categories">
+                                {{ showCategory(category) }}
+                            </span>
+                        </li>
+                        <span editable-select="thread.category.id_category" e-name="new_category" e-form="rowform"
+                            e-ng-options="c.id as c.name for c in categories"></span>
+                    </ul>
+                </td>
+                <!-- -->
+                <!-- -->
+                <td>{{thread.person}}</td>
+                <td>
+                    <!-- form -->
+                    <form editable-form name="rowform" onbeforesave="updateThread($data, thread.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == thread.url">
+                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                             save
+                        </button>
+                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                            cancel
+                        </button>
+                    </form>
+                    <div class="buttons" ng-show="!rowform.$visible">
+                        <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                        <!--<button class="btn btn-danger" ng-click="removeUser($index)">del</button>-->
+                    </div>
+                </td>
+                <!--<td><a href="#/{{categoryId}}/{{thread.id}}">Edit</a></td>-->
+                <!--<td><button confirmed-click="deleteExpression(expression.id)" ng-confirm-click="Would you like to delete expression: {{expression.expression}}?">Delete</button></td>-->
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="col-md-3">
+    <div class="thumbnail" style="padding: 20px; overflow: hidden;">
+        <p>Total entries: {{threadsNumber}}</p>
+        <div class="col-md-6">
+            <button class="btn" ng-click="manualRefresh()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Refresh</button>
+        </div>
+
+        <div class="col-md-6">
+            <button class="btn btn-danger" confirmed-click="deleteCategory(categoryId)" ng-confirm-click="Would you like to delete this category? It will not delete the sites in this category" ng-show="categoryId"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete {{getCategoryName(categoryId)}}</button>
+        </div>
+
+
+    </div>
+    <form class="well form-search">
+        <label for="searchPost">Search url</label>
+        <input type="text" ng-model="keywords" class="form-control search-query" size="40" placeholder="Search url" ng-change="searchPost()" id="searchPost">
+        <span class="glyphicon glyphicon-search" style="float:left; margin-top: 5px; margin-right: 5px;"></span>
+        <p class="help-block">Introduceti cel putin 3 caractere</p>
+    </form>
+
+    <div class="well">
+        <div id="messages" class="alert alert-success" ng-show="messageUrl">{{ messageUrl }}</div>
+        <div id="messages" class="alert alert-danger" ng-show="errorUrl">{{ errorUrl }}</div>
+        <form role="form" ng-submit="addSite()">
+            <div class="form-group">
+                <div id="name-group" class="form-group" ng-class="{ 'has-error' : errorUrl }">
+                    <div id="name-group" class="form-group" ng-class="{ 'has-success' : messageUrl }">
+                        <label for="exampleInputUrl">Add new site</label>
+                        <input type="text" class="form-control" id="exampleInputUrl" placeholder="Enter url" ng-model="siteUrl">
+                        <span class="help-block" ng-show="errorUrl">{{ errorUrl }}</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+    <div class="well">
+        <div id="messages" class="alert alert-success" ng-show="message">{{ message }}</div>
+        <div id="messages" class="alert alert-danger" ng-show="errorName">{{ errorName }}</div>
+        <form role="form" ng-submit="addSiteCategory()">
+            <div class="form-group">
+                <div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+                    <div id="name-group" class="form-group" ng-class="{ 'has-success' : message }">
+                        <label for="exampleInputText">Add new category</label>
+                        <input type="text" class="form-control" id="exampleInputText" placeholder="Enter name" ng-model="siteCategory">
+                        <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>

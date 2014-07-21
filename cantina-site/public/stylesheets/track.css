@@ -1,0 +1,116 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12px;
+    color: #5b5c5c;
+    background-color: #f3f3f3;
+}
+.top-menu {
+    background-color: #252525;
+    height: 40px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    padding-top: 0;
+    color: #ffffff;
+}
+.menu-title {
+    padding-top: 5px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.tweets {
+    padding-left: 10px;
+}
+.tweet-date {
+    font-size: 10px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+    float: left;
+    padding-right: 5px;
+}
+.tweet-subject{
+    font-size: 11px;
+}
+.tweet-tag{
+    font-size: 11px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 2px;
+}
+.label-bold{
+    color: #000000;
+}
+.label[href]:hover{
+    color: #000000;
+}
+.border-green {
+    border-color: #1CCC1C;
+}
+.visible {
+    display: none;
+}
+.tweet-number{
+    font-size: 11px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 2px;
+}
+.channel-selected {
+    border-color: #428bca;
+}
+.menu-text {
+    font-size: 12px;
+    color: #ffffff;
+    margin-left: 15px;
+}
+.menu-text:hover {
+    font-size: 12px;
+    color: #c0c0c0;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.link-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.link-title a{
+    color: #252525;
+}
+.link-title a:hover {
+    text-decoration: none;
+}
+.link-url a:hover {
+    text-decoration: none;
+}
+.link-clicks {
+    font-size: 22px;
+    font-weight: bold;
+    border-top: 2px solid rgb(180, 180, 180);
+    margin-top: 5px;
+}
+.wordwrap {
+    word-wrap: break-word;      /* IE */
+}
+.modal {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: inherit;
+    overflow: hidden;
+    width: 800px;
+}
+
+.modal-link-clicks {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.highlight-expression {
+    font-weight: bold;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 1px 3px;
+}
