@@ -1,5 +1,5 @@
 class fis1 {
-	public static void main(String args[]){
-		return null;
+	public static void main(String[] args){
+		
 	}
 }
