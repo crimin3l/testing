@@ -3,17 +3,23 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-
-# Sites section
+GET     /                           controllers.Application.sites()
+# test stefan
+GET     /bla                     controllers.Application.bla()
+#
+#
+# Sites sections
 GET     /sites                           controllers.Application.sites()
 GET     /sites/threads/:id           controllers.SitesTrack.getThreads(id: Integer, count: Integer ?= 10, offset: Integer ?= 0, keyword: String ?= "")
-GET     /sites/threads/:id/:postId           controllers.MessengerTrack.getThread(id: Integer, postId: Integer)
 GET     /sites/threadsnumber/:id           controllers.SitesTrack.getThreadsNumber(id: Integer, keyword: String ?= "")
-GET     /sites/search/:id/:keyword           controllers.MessengerTrack.searchThreads(id: Integer, keyword: String, count: Integer ?= 10, offset: Integer ?= 0)
 GET     /partials/sitesThreads.html           controllers.Application.showSitesThreads()
 DELETE  /sites/category/delete          controllers.SitesTrack.deleteCategory()
 GET     /sites/categories             controllers.SitesTrack.getCategories()
 POST     /sites/update/:id                controllers.SitesTrack.updateSite(id: Integer)
 POST     /sites/category/add           controllers.SitesTrack.addCategory()
 POST     /sites/add           controllers.SitesTrack.addSite()
+GET     /assets/*file controllers.Assets.at(path="/public", file)
+
+
+
+GET     /                           controllers.Application.sites()

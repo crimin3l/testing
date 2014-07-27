@@ -66,10 +66,16 @@ public class SitesTrack extends Controller {
         ObjectNode result = Json.newObject();
         ArrayNode an = result.putArray("categories");
 
+
         ObjectNode elementAll = Json.newObject();
         elementAll.put("id", 0);
         elementAll.put("name", "All sites");
         an.add(elementAll);
+
+
+
+
+
 
         for(SiteCategory category: categories){
             ObjectNode element = Json.newObject();
@@ -77,6 +83,15 @@ public class SitesTrack extends Controller {
             element.put("name", category.getName());
             an.add(element);
         }
+
+        // test start stefan
+        ObjectNode test = Json.newObject();
+        test.put("id", 4);
+        test.put("name", "Test-Stefan");
+        an.add(test);
+
+
+        // test end
 
         String resultString = result.toString();
 
